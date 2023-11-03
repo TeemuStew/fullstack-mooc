@@ -1,44 +1,44 @@
 ```mermaid
 sequenceDiagram
-    participant selain
-    participant palvelin
+    participant Browser
+    participant Server
 
-    selain->>palvelin: POST https://studies.cs.helsinki.fi/exampleapp/new_note
-    activate palvelin
+    Browser->>Server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    activate Server
 
-    Note left of palvelin: POST pyyntö lähettää lomakkeen tiedot 
+    Note left of Server: POST pyyntö lähettää lomakkeen tiedot 
 
-    palvelin-->>selain: HTTP status 302
-    deactivate palvelin
+    Server-->>Browser: HTTP status 302
+    deactivate Server
 
-    Note right of selain: Uudelleenohjauspyyntö location osoitteeseen
+    Note right of Browser: Uudelleenohjauspyyntö location osoitteeseen
 
-    selain->>palvelin: GET https://studies.cs.helsinki.fi/exampleapp/notes
-    activate palvelin
-    palvelin-->>selain: HTTP status 200
-    deactivate palvelin
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate Server
+    Server-->>Browser: HTTP status 200
+    deactivate Server
 
-    Note right of selain: Palautetaan html dokumentti
+    Note right of Browser: Palautetaan html dokumentti
 
-    selain->>palvelin: GET https://studies.cs.helsinki.fi/exampleapp/main.css
-    activate palvelin
-    palvelin-->>selain: HTTP status 200
-    deactivate palvelin 
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate Server
+    Server-->>Browser: HTTP status 200
+    deactivate Server 
 
-    Note right of selain: Palautetaan css dokumentti
+    Note right of Browser: Palautetaan css dokumentti
 
-    selain->>palvelin: GET https://studies.cs.helsinki.fi/exampleapp/main.js
-    activate palvelin
-    palvelin-->>selain: HTTP status 200
-    deactivate palvelin 
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate Server
+    Server-->>Browser: HTTP status 200
+    deactivate Server 
 
-    Note right of selain: Palautetaan javascript dokumentti
+    Note right of Browser: Palautetaan javascript dokumentti
 
-    selain->>palvelin: GET https://studies.cs.helsinki.fi/exampleapp/data.json
-    activate palvelin
-    palvelin-->>selain: HTTP status 200
-    deactivate palvelin
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate Server
+    Server-->>Browser: HTTP status 200
+    deactivate Server
 
-    Note right of selain: Palautetaan json dokumentti
+    Note right of Browser: Palautetaan json dokumentti
 
 ```
