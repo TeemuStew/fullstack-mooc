@@ -18,27 +18,27 @@ sequenceDiagram
     Server-->>Browser: HTTP status 200
     deactivate Server
 
-    Note right of Browser: Palautetaan html dokumentti
+    Note right of Browser: Palautetaan HTML dokumentti
 
     Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
     activate Server
     Server-->>Browser: HTTP status 200
     deactivate Server 
 
-    Note right of Browser: Palautetaan css dokumentti
+    Note right of Browser: Palautetaan CSS dokumentti
 
     Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
     activate Server
     Server-->>Browser: HTTP status 200
     deactivate Server 
 
-    Note right of Browser: Palautetaan javascript dokumentti
+    Note right of Browser: Palautetaan Javascript dokumentti
 
     Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate Server
     Server-->>Browser: HTTP status 200
     deactivate Server
 
-    Note right of Browser: Palautetaan json dokumentti
+    Note right of Browser: Palautetaan JSON dokumentti
 
 ```
