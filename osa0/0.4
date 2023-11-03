@@ -1,1 +1,17 @@
-s
+sequenceDiagram
+participant browser
+participant server
+
+browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+activate server
+server-->>browser: HTTP 200 OK (uusi muistiinpano tallennettu)
+deactivate server
+
+Note right of browser: Käyttäjä kirjoittaa uuden muistiinpanon ja painaa Tallenna-nappia
+
+browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+activate server
+server-->>browser: Päivitetty HTML-dokumentti (sisältää uuden muistiinpanon)
+deactivate server
+
+Note right of browser: Sivu päivitetään ja näyttää nyt uuden muistiinpanon
