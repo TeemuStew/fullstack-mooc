@@ -1,6 +1,7 @@
 osan 0 tehtävien vastaukset:
 
 **0.4:**
+
 sequenceDiagram
     participant browser
     participant server
@@ -21,6 +22,7 @@ sequenceDiagram
 
 --------------------------------------------------------------------------------------
 **0.5:**
+
 sequenceDiagram
     participant browser
     participant server
