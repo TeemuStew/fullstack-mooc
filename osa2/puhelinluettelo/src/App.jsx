@@ -1,61 +1,27 @@
-import React from 'react';
-
-const Header = ({ course }) => {
-    return <h1>{course}</h1>;
-};
-
-const Part = ({ part, exercise }) => {
-    return (
-        <p>
-            {part} {exercise}
-        </p>
-    );
-};
-
-const Content = ({ parts }) => {
-    return (
-        <div>
-            <Part part={parts[0].name} exercise={parts[0].exercises} />
-            <Part part={parts[1].name} exercise={parts[1].exercises} />
-            <Part part={parts[2].name} exercise={parts[2].exercises} />
-        </div>
-    );
-};
-/*
-const Total = ({ parts }) => {
-    const totalExercises = parts.reduce((sum, part) => sum + part.exercises, 0);
-
-    return (
-        <p>
-            Number of exercises {totalExercises}
-        </p>
-    );
-}; */
+import { useState } from 'react'
 
 const App = () => {
-    const course = 'Half Stack application development';
-    const parts = [
-        {
-            name: 'Fundamentals of React',
-            exercises: 10
-        },
-        {
-            name: 'Using props to pass data',
-            exercises: 7
-        },
-        {
-            name: 'State of a component',
-            exercises: 14
-        }
-    ];
+  const [persons, setPersons] = useState([
+    { name: 'Arto Hellas' }
+  ]) 
+  const [newName, setNewName] = useState('')
 
-    // <Total parts={parts} />      Content parts alla
-    return (
+  return (
+    <div>
+      <h2>Phonebook</h2>
+      <form>
         <div>
-            <Header course={course} />
-            <Content parts={parts} />
+          name: <input />
         </div>
-    );
-};
+        <div>
+          <button type="submit">add</button>
+        </div>
+      </form>
+      <h2>Numbers</h2>
+      ...
+    </div>
+  )
 
-export default App;
+}
+
+export default App
