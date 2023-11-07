@@ -1,23 +1,22 @@
-// Uuden henkilön lisäävä lomake (PersonForm.js)
 import React from 'react';
 
-const PersonForm = ({ newName, newNumber, handleNameChange, handleNumberChange, addPerson }) => {
+const PersonForm = ({
+  newName,
+  newNumber,
+  handleNameChange,
+  handleNumberChange,
+  addPerson
+}) => {
   return (
     <form onSubmit={addPerson}>
       <div>
-        name: <input
-          value={newName}
-          onChange={handleNameChange}
-        />
+        Name: <input value={newName} onChange={handleNameChange} />
       </div>
       <div>
-        number: <input
-          value={newNumber}
-          onChange={handleNumberChange}
-        />
+        Number: <input value={newNumber} onChange={handleNumberChange} />
       </div>
       <div>
-        <button type="submit">add</button>
+        <button type="submit">Add</button>
       </div>
     </form>
   );

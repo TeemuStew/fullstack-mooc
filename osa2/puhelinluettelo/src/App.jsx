@@ -23,8 +23,29 @@ const App = () => {
   const addPerson = (event) => {
     event.preventDefault();
 
-    if (persons.some(person => person.name === newName)) {
-      alert(`${newName} is already added to the phonebook`);
+    const existingPerson = persons.find(person => person.name === newName);
+
+    if (existingPerson) {
+      const confirmUpdate = window.confirm(
+        `${newName} is already added to the phonebook, replace the old number with a new one?`
+      );
+
+      if (confirmUpdate) {
+        const updatedPerson = { ...existingPerson, number: newNumber };
+
+        personService
+          .update(existingPerson.id, updatedPerson)
+          .then(response => {
+            setPersons(
+              persons.map(person =>
+                person.id === existingPerson.id ? response.data : person
+              )
+            );
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      }
     } else {
       const personObject = {
         name: newName,
@@ -44,24 +65,7 @@ const App = () => {
   };
 
   const deletePerson = (id) => {
-    const personToDelete = persons.find(person => person.id === id);
-
-    if (!personToDelete) {
-      alert(`Person with id ${id} not found.`);
-      return;
-    }
-
-    const confirmDelete = window.confirm(`Delete ${personToDelete.name}?`);
-
-    if (confirmDelete) {
-      personService.remove(id)
-        .then(() => {
-          setPersons(persons.filter(person => person.id !== id));
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-    }
+    // Lisää poiston toiminnallisuus
   };
 
   return (
