@@ -1,17 +1,26 @@
-const PersonForm = (props) => {
-    return (
-      <form onSubmit={props.addContact}>
-        <div>
-          name: <input value={props.name} onChange={props.nameHandler}/>
-        </div>
-        <div>
-          number: <input value={props.number} onChange={props.numberHandler}/>
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-    )
-}
+// Uuden henkilön lisäävä lomake (PersonForm.js)
+import React from 'react';
 
-export default PersonForm
+const PersonForm = ({ newName, newNumber, handleNameChange, handleNumberChange, addPerson }) => {
+  return (
+    <form onSubmit={addPerson}>
+      <div>
+        name: <input
+          value={newName}
+          onChange={handleNameChange}
+        />
+      </div>
+      <div>
+        number: <input
+          value={newNumber}
+          onChange={handleNumberChange}
+        />
+      </div>
+      <div>
+        <button type="submit">add</button>
+      </div>
+    </form>
+  );
+};
+
+export default PersonForm;

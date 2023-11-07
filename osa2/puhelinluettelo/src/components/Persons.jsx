@@ -1,18 +1,21 @@
-const Persons = ({ persons, nameFilter, handleDeleteContact }) => {
-    return (
-      <div>
-        {persons.filter(p =>
-            p.name.toLowerCase().includes(nameFilter.toLowerCase())
-            ).map(person =>
-              <div key={person.name}>
-                <p>
-                  {person.name} {person.number}&nbsp;
-                  <button id={person.name} onClick={() => handleDeleteContact(person)}>delete</button>
-                </p>
-              </div>
-        )}
-      </div>
-    )
-}
+import React from 'react';
 
-export default Persons
+const Persons = ({ persons, searchTerm, deletePerson }) => {
+  const filteredPersons = persons.filter(person =>
+    person.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <ul>
+      {filteredPersons.map(person => (
+        <li key={person.id}>
+          {person.name} - {person.number}{' '}
+          <button onClick={() => deletePerson(person.id)}>Delete</button>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+
+export default Persons;

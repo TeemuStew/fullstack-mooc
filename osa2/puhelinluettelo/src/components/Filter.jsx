@@ -1,9 +1,15 @@
-const Filter = (props) => {
-    return (
-      <div>
-        filter shown with <input value={props.filter} onChange={props.eventHandler}/>
-      </div> 
-    )
-}
+// Filtteröintilomake (Filter.js)
+import React from 'react';
 
-export default Filter
+const Filter = ({ searchTerm, handleSearch }) => {
+  return (
+    <div>
+      Filter shown with: <input
+        value={searchTerm}
+        onChange={handleSearch}
+      />
+    </div>
+  );
+};
+
+export default Filter;
