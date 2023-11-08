@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
+import Notification from './components/Notification'; // Lisätty ilmoituskomponentin tuonti
 import personService from './services/person';
 
 const App = () => {
@@ -9,6 +10,7 @@ const App = () => {
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [notification, setNotification] = useState(null);
 
   useEffect(() => {
     personService.getAll()
@@ -41,10 +43,14 @@ const App = () => {
                 person.id === existingPerson.id ? response.data : person
               )
             );
+            showNotification(`Updated ${newName}'s number`);
           })
           .catch(error => {
             console.error('Error:', error);
+            showNotification('Error updating the number', true);
           });
+        setNewName('');
+        setNewNumber('');
       }
     } else {
       const personObject = {
@@ -55,17 +61,45 @@ const App = () => {
       personService.create(personObject)
         .then(response => {
           setPersons(persons.concat(response.data));
+          showNotification(`Added ${newName}`);
           setNewName('');
           setNewNumber('');
         })
         .catch(error => {
           console.error('Error:', error);
+          showNotification('Error adding a new person', true);
         });
     }
   };
 
   const deletePerson = (id) => {
-    // Lisää poiston toiminnallisuus
+    const personToDelete = persons.find(person => person.id === id);
+
+    if (!personToDelete) {
+      showNotification(`Person not found`, true);
+      return;
+    }
+
+    const confirmDelete = window.confirm(`Do you really want to delete ${personToDelete.name}?`);
+
+    if (confirmDelete) {
+      personService.remove(id)
+        .then(() => {
+          setPersons(persons.filter(person => person.id !== id));
+          showNotification(`Deleted ${personToDelete.name}`);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          showNotification('Error deleting the person', true);
+        });
+    }
+  };
+
+  const showNotification = (message, isError = false) => {
+    setNotification({ message, isError });
+    setTimeout(() => {
+      setNotification(null);
+    }, 5000);
   };
 
   return (
@@ -85,6 +119,8 @@ const App = () => {
       />
 
       <h3>Numbers</h3>
+
+      <Notification message={notification ? notification.message : null} isError={notification ? notification.isError : false} />
 
       <Persons persons={persons} searchTerm={searchTerm} deletePerson={deletePerson} />
     </div>
