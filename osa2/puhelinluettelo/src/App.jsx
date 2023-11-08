@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
-import Notification from './components/Notification'; // Lisätty ilmoituskomponentin tuonti
+import Notification from './components/Notification'; 
 import personService from './services/person';
 
 const App = () => {
@@ -106,6 +106,8 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
 
+      <Notification message={notification ? notification.message : null} isError={notification ? notification.isError : false} />
+
       <Filter searchTerm={searchTerm} handleSearch={(event) => setSearchTerm(event.target.value)} />
 
       <h3>Add a new</h3>
@@ -119,8 +121,6 @@ const App = () => {
       />
 
       <h3>Numbers</h3>
-
-      <Notification message={notification ? notification.message : null} isError={notification ? notification.isError : false} />
 
       <Persons persons={persons} searchTerm={searchTerm} deletePerson={deletePerson} />
     </div>
