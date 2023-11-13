@@ -1,40 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Countries from './components/Countries';
+import React, { useEffect, useState } from "react";
+import countryService from './components/countryService'
+import Countries from "./components/Countries";
 
-function App() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [countries, setCountries] = useState([]);
-  const [showCountries, setShowCountries] = useState([]);
+const Filter = (props) => {
+  return (
+    <div>
+      find countries&nbsp;<input value={props.filter} onChange={props.eventHandler}/>
+    </div> 
+  );
+}
+
+const App = () => {
+  const [countries, setCounties] = useState([])
+  const [countryFilter, setCountryFilter] = useState('')
 
   useEffect(() => {
-    axios
-      .get('https://restcountries.com/v2/all')
-      .then((response) => {
-        setCountries(response.data);
+    countryService
+      .getAll()
+      .then(allCountries => {
+        setCounties(allCountries)
       })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
+  }, [])
 
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-    const filteredCountries = countries.filter((country) =>
-      country.name.toLowerCase().includes(event.target.value.toLowerCase())
-    );
-    setShowCountries(filteredCountries);
-  };
+  const showCountry = (country) => {
+    setCountryFilter(country)
+  }
+
+  const handleNewFilter = (event) => {
+    setCountryFilter(event.target.value)
+  }
 
   return (
     <div>
-      <div>
-        find countries: <input value={searchTerm} onChange={handleSearch} />
-      </div>
-      <Countries
-        countries={countries}
-        showCountries={showCountries}
-      />
+      <Filter filter={countryFilter} eventHandler={handleNewFilter} />
+      <Countries key={countries.name} countries={countries} countryFilter={countryFilter} handleShowCountry={showCountry} />
     </div>
   );
 }

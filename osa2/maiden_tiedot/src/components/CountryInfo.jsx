@@ -1,26 +1,21 @@
-import React from 'react';
+import WeatherData from "./Weather";
 
-const ListLanguage = ({ language }) => <li>{language}</li>
-
-const ListFlag = ({ flag, country }) => {
-    return <img src={flag} width="350" height="200" alt={`Flag of ${country}`} />
-}
-
-const CountryInfo = ({ country }) => {
+const CountryData = ({ country }) => {
   return (
     <div>
-      <h2>{country.name}</h2>
-      <p>capital {country.capital}</p>
-      <p>area {country.area}</p>
-      <p>languages:</p>
+      <h1>{country.name.common}</h1>
+      <div>capital {country.capital}</div>
+      <div>area {country.area}</div>
+      <h3>languages:</h3>
       <ul>
-        {country.languages.map((language) => (
-          <ListLanguage key={language.name} language={language.name} />
+        {Object.values(country.languages).map((language) => (
+          <li key={language}>{language}</li>
         ))}
       </ul>
-      <ListFlag flag={country.flags[1]} country={country.name} />
+      <img src={country.flags.png} alt={`${country.name.common} flag`} />
+      <WeatherData city={country.capital} />
     </div>
   );
 };
 
-export default CountryInfo;
+export default CountryData;
