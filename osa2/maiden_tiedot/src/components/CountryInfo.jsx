@@ -1,5 +1,11 @@
 import React from 'react';
 
+const ListLanguage = ({ language }) => <li>{language}</li>
+
+const ListFlag = ({ flag, country }) => {
+    return <img src={flag} width="350" height="200" alt={`Flag of ${country}`} />
+}
+
 const CountryInfo = ({ country }) => {
   return (
     <div>
@@ -9,14 +15,10 @@ const CountryInfo = ({ country }) => {
       <p>languages:</p>
       <ul>
         {country.languages.map((language) => (
-          <li key={language.name}>{language.name}</li>
+          <ListLanguage key={language.name} language={language.name} />
         ))}
       </ul>
-      <img
-        src={country.flags[1]}
-        alt={`Flag of ${country.name}`}
-        width="100"
-      />
+      <ListFlag flag={country.flags[1]} country={country.name} />
     </div>
   );
 };
