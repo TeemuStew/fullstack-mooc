@@ -1,6 +1,6 @@
 import axios from "axios"
 const baseUrl = 'https://studies.cs.helsinki.fi/restcountries/api/all'
-const apiKey = '455c3d32c946eba6de85beb8999e3c7f'
+const apiKey = '54l41n3n4v41m34rv0' // API toimii välillä ja välillä ei
 
 const getAll = () => {
     const request = axios.get(baseUrl)
