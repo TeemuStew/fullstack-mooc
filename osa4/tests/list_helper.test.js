@@ -21,13 +21,13 @@ describe('total likes', () => {
 
 describe('favorite blog', () => {
   test('favorite blog when list has many blogs', () => {
-    expect(listHelper.fauvoriteBlog(helper.blogs)).toEqual(helper.blogs[2])
+    expect(listHelper.favoriteBlog(helper.blogs)).toEqual(helper.blogs[2])
   })
   test('favorite blog when list has one blog', () => {
-    expect(listHelper.fauvoriteBlog(helper.listWithOneBlog)).toEqual(helper.listWithOneBlog[0])
+    expect(listHelper.favoriteBlog(helper.listWithOneBlog)).toEqual(helper.listWithOneBlog[0])
   })
   test('favorite blog when list has no blog', () => {
-    expect(listHelper.fauvoriteBlog([])).toEqual(null)
+    expect(listHelper.favoriteBlog([])).toEqual(null)
   })
 })
 
